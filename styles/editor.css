@@ -1,0 +1,86 @@
+.editor-class{
+  height: 300px !important;
+  padding-left: 5px !important;
+}
+
+/* ant design over ride*/
+
+
+.ant-comment-actions > li > span{
+  color: white !important;
+  background-color: #2363EB;
+  padding: 7px 15px;
+  border-radius: 5px;
+}
+.toggleSwitchOn {
+  background: #2dcc70 !important;
+}
+
+/* TagsInputs */
+
+.tags-div {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  min-height: 40px;
+  width: auto;
+  padding: 4 0 0 0;
+  border-width: 1px;
+  border-color: rgb(163 163 163);
+
+  border-radius: 6px;
+}
+.tags-div:focus-within {
+  border-width: 1px;
+  border-color: rgb(0,15,0,145);
+
+}
+
+.tagsInput {
+  flex: 1;
+  border-style: none;
+  height: 52px;
+  width: 90%;
+  border-radius: 6px;
+  font-size: 14px;
+  padding: 6px 0 0 4px;
+}
+.tagsInput:focus {
+  outline: transparent;
+}
+#tags {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 8px 0 0 0;
+}
+
+.tag {
+  width: auto;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  padding: 0 8px;
+  font-size: 14px;
+  list-style: none;
+  border-radius: 0.25rem;
+  
+  margin: 0 8px 8px 8px;
+  background: #0052cc;
+}
+
+.tag-close-icon {
+  display: block;
+  width: 16px;
+  height: 16px;
+  line-height: 13px;
+  text-align: center;
+  font-size: 14px;
+  margin-left: 8px;
+  color: #0052cc;
+  border-radius: 50%;
+  background: #fff;
+  cursor: pointer;
+}

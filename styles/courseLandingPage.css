@@ -1,0 +1,266 @@
+  .course_landing_page h6,
+  .course_landing_page .h6,
+  .course_landing_page h5,
+  .course_landing_page .h5,
+  .course_landing_page h4,
+  .course_landing_page .h4,
+  .course_landing_page h3,
+  .course_landing_page .h3,
+  .course_landing_page h2,
+  .course_landing_page .h2,
+  .course_landing_page h1,
+  .course_landing_page .h1 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    line-height: 1.3;
+  }
+
+  .course_landing_page h1,
+  .course_landing_page .h1 {
+    font-size: calc(1.375rem + 1.5vw);
+  }
+
+  @media (min-width: 1200px) {
+    .course_landing_page h1,
+    .course_landing_page .h1 {
+      font-size: 2.5rem;
+    }
+  }
+
+  .course_landing_page h2,
+  .course_landing_page .h2 {
+    font-size: calc(1.325rem + 0.9vw);
+  }
+
+  @media (min-width: 1200px) {
+    .course_landing_page h2,
+    .course_landing_page .h2 {
+      font-size: 2rem;
+    }
+  }
+
+  .course_landing_page h3,
+  .course_landing_page .h3 {
+    font-size: calc(1.3rem + 0.6vw);
+  }
+
+  @media (min-width: 1200px) {
+    .course_landing_page h3,
+    .course_landing_page .h3 {
+      font-size: 1.75rem;
+    }
+  }
+
+  .course_landing_page h4,
+  .course_landing_page .h4 {
+    font-size: calc(1.275rem + 0.3vw);
+  }
+
+  @media (min-width: 1200px) {
+    .course_landing_page h4,
+    .course_landing_page .h4 {
+      font-size: 1.5rem;
+    }
+  }
+
+  .course_landing_page h5,
+  .course_landing_page .h5 {
+    font-size: 1.25rem;
+  }
+
+  .course_landing_page h6,
+  .course_landing_page .h6 {
+    font-size: 1rem;
+  }
+
+  .course_landing_page p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+  }
+
+  .course_landing_page abbr[title],
+  .course_landing_page abbr[data-bs-original-title] {
+    -webkit-text-decoration: underline dotted;
+    text-decoration: underline dotted;
+    cursor: help;
+    -webkit-text-decoration-skip-ink: none;
+    text-decoration-skip-ink: none;
+  }
+
+  .course_landing_page address {
+    margin-bottom: 1rem;
+    font-style: normal;
+    line-height: inherit;
+  }
+
+  .course_landing_page ol,
+  .course_landing_page ul {
+    padding-left: 2rem;
+  }
+
+  .course_landing_page ol,
+  .course_landing_page ul,
+  .course_landing_page dl {
+    margin-top: 0;
+    margin-bottom: 1rem;
+  }
+
+  .course_landing_page ol ol,
+  .course_landing_page ul ul,
+  .course_landing_page ol ul,
+  .course_landing_page ul ol {
+    margin-bottom: 0;
+  }
+
+  .course_landing_page ul li {
+    list-style-type: disc;
+  }
+
+  .course_landing_page ol li {
+    list-style-type: number;
+  }
+
+  .course_landing_page dt {
+    font-weight: 700;
+  }
+
+  .course_landing_page dd {
+    margin-bottom: 0.5rem;
+    margin-left: 0;
+  }
+
+  .course_landing_page blockquote {
+    margin: 0 0 1rem;
+  }
+
+  .course_landing_page b,
+  .course_landing_page strong {
+    font-weight: bolder;
+  }
+
+  .course_landing_page small,
+  .course_landing_page .small {
+    font-size: 0.875em;
+  }
+
+  .course_landing_page mark,
+  .course_landing_page .mark {
+    padding: 0.2em;
+    background-color: #fcf8e3;
+  }
+
+  .course_landing_page sub,
+  .course_landing_page sup {
+    position: relative;
+    font-size: 0.75em;
+    line-height: 0;
+    vertical-align: baseline;
+  }
+
+  .course_landing_page sub {
+    bottom: -0.25em;
+  }
+
+  .course_landing_page sup {
+    top: -0.5em;
+  }
+
+  .course_landing_page a {
+    color: #0d6efd;
+    text-decoration: underline;
+  }
+
+  .course_landing_page a:hover {
+    color: #0a58ca;
+  }
+
+  .course_landing_page a:not([href]):not([class]),
+  .course_landing_page a:not([href]):not([class]):hover {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .course_landing_page pre,
+  .course_landing_page code,
+  .course_landing_page kbd,
+  .course_landing_page samp {
+    font-family: var(--bs-font-monospace);
+    font-size: 1em;
+    direction: ltr;
+    unicode-bidi: bidi-override;
+  }
+
+  .course_landing_page pre {
+    display: block;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    overflow: auto;
+    font-size: 0.875em;
+  }
+
+  .course_landing_page pre code {
+    font-size: inherit;
+    color: inherit;
+    word-break: normal;
+  }
+
+  .course_landing_page code {
+    font-size: 0.875em;
+    color: #d63384;
+    word-wrap: break-word;
+  }
+
+  .course_landing_page a > code {
+    color: inherit;
+  }
+
+  .course_landing_page kbd {
+    padding: 0.2rem 0.4rem;
+    font-size: 0.875em;
+    color: #fff;
+    background-color: #212529;
+    border-radius: 0.2rem;
+  }
+
+  .course_landing_page kbd kbd {
+    padding: 0;
+    font-size: 1em;
+    font-weight: 700;
+  }
+
+  .course_landing_page figure {
+    margin: 0 0 1rem;
+  }
+
+  .course_landing_page img,
+  .course_landing_page svg {
+    vertical-align: middle;
+  }
+
+  .course_landing_page table {
+    caption-side: bottom;
+    border-collapse: collapse;
+  }
+  .course_landing_page caption {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    color: #6c757d;
+    text-align: left;
+  }
+
+  .course_landing_page th {
+    text-align: inherit;
+    text-align: -webkit-match-parent;
+  }
+
+  .course_landing_page thead,
+  .course_landing_page tbody,
+  .course_landing_page tfoot,
+  .course_landing_page tr,
+  .course_landing_page td,
+  .course_landing_page th {
+    border-color: inherit;
+    border-style: solid;
+    border-width: 0;
+  }

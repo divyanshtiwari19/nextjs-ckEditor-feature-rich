@@ -1,0 +1,1095 @@
+.custom-box-shadow {
+  box-shadow: 2px 2px 10px 2px #f4f2f2;
+}
+
+.breadcrumb {
+  /*centering*/
+  display: inline-block;
+  /* box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.35); */
+  overflow: hidden;
+  border-radius: 5px;
+  /*Lets add the numbers for each link using CSS counters. flag is the name of the counter. to be defined using counter-reset in the parent element of the links*/
+  /* counter-reset: flag; */
+}
+
+.breadcrumb a {
+  text-decoration: none;
+  outline: none;
+  display: block;
+  float: left;
+  font-size: 12px;
+  line-height: 36px;
+  color: white;
+  /*need more margin on the left of links to accomodate the numbers*/
+  padding: 0 10px 0 40px;
+  background: #666;
+  background: linear-gradient(#666, #333);
+  position: relative;
+}
+/*since the first link does not have a triangle before it we can reduce the left padding to make it look consistent with other links*/
+.breadcrumb a:first-child {
+  padding-left: 40px;
+  border-radius: 5px 0 0 5px; /*to match with the parent's radius*/
+}
+.breadcrumb a:first-child:before {
+  left: 14px;
+}
+.breadcrumb a:last-child {
+  border-radius: 0 5px 5px 0; /*this was to prevent glitches on hover*/
+  padding-right: 20px;
+}
+
+/*hover/active styles*/
+.breadcrumb a.active,
+.breadcrumb a:not(:last-child):hover {
+  background: #333;
+  background: linear-gradient(#333, #000);
+}
+.breadcrumb a.active:after,
+.breadcrumb a:hover:after {
+  background: #333;
+  background: linear-gradient(135deg, #333, #000);
+}
+
+/*adding the arrows for the breadcrumbs using rotated pseudo elements*/
+.breadcrumb a:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: -18px; /*half of square's length*/
+  /*same dimension as the line-height of .breadcrumb a */
+  width: 36px;
+  height: 36px;
+  /*as you see the rotated square takes a larger height. which makes it tough to position it properly. So we are going to scale it down so that the diagonals become equal to the line-height of the link. We scale it to 70.7% because if square's: 
+  length = 1; diagonal = (1^2 + 1^2)^0.5 = 1.414 (pythagoras theorem)
+  if diagonal required = 1; length = 1/1.414 = 0.707*/
+  transform: scale(0.707) rotate(45deg);
+  /*we need to prevent the arrows from getting buried under the next link*/
+  z-index: 1;
+  /*background same as links but the gradient will be rotated to compensate with the transform applied*/
+  background: #666;
+  background: linear-gradient(135deg, #666, #333);
+  /*stylish arrow design using box shadow*/
+  box-shadow: 1px -1px 0 1px rgba(0, 0, 0, 0.4);
+  /*
+    5px - for rounded arrows and 
+    50px - to prevent hover glitches on the border created using shadows*/
+  border-radius: 0 5px 0 50px;
+}
+/*we dont need an arrow after the last link*/
+.breadcrumb a:last-child:after {
+  content: none;
+}
+
+.breadcrumb a:last-child {
+  background-color: #22c55e;
+  color: white;
+}
+
+/*we will use the :before element to show numbers*/
+/* .breadcrumb a:before {
+  content: counter(flag);
+  counter-increment: flag;
+  border-radius: 100%;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  margin: 8px 0;
+  position: absolute;
+  top: 0;
+  left: 30px;
+  background: #444;
+  background: linear-gradient(#444, #222);
+  font-weight: bold;
+} */
+
+.flat a,
+.flat a:after {
+  background: white;
+  font-weight: 500;
+  color: black;
+  transition: all 0.2s;
+}
+.flat a:before {
+  background: white;
+  box-shadow: 0 0 0 1px #ccc;
+}
+.flat a:not(:last-child):hover,
+.flat a.active,
+.flat a:hover:after,
+.flat a.active:after {
+  background: #4ade80;
+  color: white;
+}
+
+/* tooltip start */
+
+.tooltip-parent {
+  position: relative;
+  /* background: #ffffff; */
+  /* color: #000; */
+  /* padding: 15px; */
+  /* margin: 10px; */
+  /* border-radius: 10px; */
+  /* width: 150px; */
+  /* height: 50px; */
+  /* font-size: 17px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  /* box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1); */
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.tooltip {
+  position: absolute;
+  top: 0;
+  font-size: 14px;
+  background: #ffffff;
+  color: #ffffff;
+  padding: 5px 8px;
+  border-radius: 5px;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.tooltip::before {
+  position: absolute;
+  content: "";
+  height: 8px;
+  width: 8px;
+  background: #ffffff;
+  bottom: -3px;
+  left: 50%;
+  transform: translate(-50%) rotate(45deg);
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.tooltip-parent:hover .tooltip {
+  top: -45px;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+svg:hover span,
+svg:hover .tooltip {
+  text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.1);
+}
+
+/* .tooltip-parent:hover, */
+.tooltip-parent:hover .tooltip,
+.tooltip-parent:hover .tooltip::before {
+  /* background: linear-gradient(320deg, #22c55e, #22c55e); */
+  background: #22c55e;
+  color: #ffffff;
+}
+
+/* tooltip end  */
+
+/* custom table style */
+.rdt_TableHeadRow {
+  background-color: #f8fafc !important;
+}
+
+.rdt_TableHeader {
+  position: absolute !important;
+  top: -4.27rem !important;
+  z-index: 10 !important;
+  padding: 1rem 0.5rem;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  padding-right: 1rem !important;
+}
+
+.rdt_TableCell {
+  padding: 16px 24px !important;
+  white-space: nowrap;
+}
+
+.rdt_TableHead .rdt_TableCol {
+  padding: 16px 24px !important;
+}
+.rdt_TableHead .rdt_TableCol:first-child {
+  padding: 0px !important;
+}
+
+.rdt_TableHead .rdt_TableCol div div {
+  font-weight: 600 !important;
+  font-size: 0.8rem;
+}
+
+.rdt_Pagination {
+  border-bottom-left-radius: 8px !important;
+  border-bottom-right-radius: 8px !important;
+}
+
+.rdt_TableRow:hover {
+  background-color: #f8fafc !important;
+}
+
+.rdt_TableHeadRow,
+.rdt_TableHead {
+  border-color: #f1f5f9 !important;
+}
+
+.rdt_TableCol_Sortable:hover {
+  opacity: 1 !important;
+}
+
+.rdt_TableHeader > div:nth-child(3) > div {
+  font-size: 0.9rem;
+  color: #000000;
+}
+
+.rdt_TableHeader > div:nth-child(3) {
+  padding-right: 1rem !important;
+}
+/* custom table style */
+
+/**
+ * @license Copyright (c) 2014-2023, CKSource Holding sp. z o.o. All rights reserved.
+ * This file is licensed under the terms of the MIT License (see LICENSE.md).
+ */
+
+:root {
+  --ck-sample-base-spacing: 2em;
+  --ck-sample-color-white: #fff;
+  --ck-sample-color-green: #279863;
+  --ck-sample-color-blue: #1a9aef;
+  --ck-sample-container-width: 1285px;
+  --ck-sample-sidebar-width: 350px;
+  --ck-sample-editor-min-height: 72vh;
+  --ck-sample-editor-z-index: 10;
+}
+
+/* --------- EDITOR STYLES  ---------------------------------------------------------------------------------------- */
+
+.app-custom-fullscreen-ckeditor .editor__editable,
+/* Classic build. */
+.app-custom-fullscreen-ckeditor main .ck-editor[role='application'] .ck.ck-content,
+/* Decoupled document build. */
+.app-custom-fullscreen-ckeditor .ck.editor__editable[role='textbox'],
+.app-custom-fullscreen-ckeditor .ck.ck-editor__editable[role='textbox'],
+/* Inline & Balloon build. */
+.app-custom-fullscreen-ckeditor .ck.editor[role='textbox'] {
+  width: 100%;
+  background: #fff;
+  font-size: 1em;
+  line-height: 1.6em;
+  min-height: var(--ck-sample-editor-min-height);
+  padding: 1.5em 2em;
+}
+
+.app-custom-fullscreen-ckeditor .ck.ck-editor__editable {
+  background: #fff;
+  border: 1px solid hsl(0, 0%, 70%);
+  width: 100%;
+}
+
+/* Because of sidebar `position: relative`, Edge is overriding the outline of a focused editor. */
+.app-custom-fullscreen-ckeditor .ck.ck-editor__editable {
+  position: relative;
+  z-index: var(--ck-sample-editor-z-index);
+}
+
+.app-custom-fullscreen-ckeditor .editor-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  position: relative;
+  width: 100%;
+  justify-content: center;
+}
+
+/* --------- .app-custom-fullscreen-ckeditor DECOUPLED (DOCUMENT) BUILD. ---------------------------------------------*/
+body[data-editor="DecoupledDocumentEditor"] .document-editor__toolbar {
+  width: 100%;
+}
+
+body[data-editor="DecoupledDocumentEditor"] .collaboration-demo__editable,
+body[data-editor="DecoupledDocumentEditor"] .row-editor .editor {
+  /* A pixel is added for each of the border. */
+  width: calc(21cm + 2px);
+  min-height: calc(29.7cm + 2px);
+  /* To avoid having extra scrolls inside the editor container. */
+  height: fit-content;
+  padding: 2cm 1.2cm;
+  margin: 2.5rem;
+  border: 1px hsl(0, 0%, 82.7%) solid;
+  background-color: var(--ck-sample-color-white);
+  box-shadow: 0 0 5px hsla(0, 0%, 0%, 0.1);
+  box-sizing: border-box;
+}
+
+body[data-editor="DecoupledDocumentEditor"] .row-editor {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  overflow-y: auto;
+  background-color: #f2f2f2;
+  border: 1px solid hsl(0, 0%, 77%);
+  /* Limit the max-height of the editor to avoid scrolling from bottom to top to see the toolbar. */
+  max-height: 700px;
+}
+
+body[data-editor="DecoupledDocumentEditor"] .sidebar {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+/* --------- COMMENTS & TRACK CHANGES FEATURE ---------------------------------------------------------------------- */
+.app-custom-fullscreen-ckeditor .sidebar {
+  padding: 0 15px;
+  position: relative;
+  min-width: var(--ck-sample-sidebar-width);
+  max-width: var(--ck-sample-sidebar-width);
+  font-size: 20px;
+  border: 1px solid hsl(0, 0%, 77%);
+  background: hsl(0, 0%, 98%);
+  border-left: 0;
+  overflow: hidden;
+  min-height: 100%;
+  flex-grow: 1;
+}
+
+/* Do not inherit styles related to the editable editor content. See line 25.*/
+.app-custom-fullscreen-ckeditor .sidebar .ck-content[role="textbox"],
+.ck.ck-annotation-wrapper .ck-content[role="textbox"] {
+  min-height: unset;
+  width: unset;
+  padding: 0;
+  background: transparent;
+}
+
+.app-custom-fullscreen-ckeditor .sidebar.narrow {
+  min-width: 60px;
+  flex-grow: 0;
+}
+
+.app-custom-fullscreen-ckeditor .sidebar.hidden {
+  display: none !important;
+}
+
+.app-custom-fullscreen-ckeditor #sidebar-display-toggle {
+  position: absolute;
+  z-index: 1;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  left: 15px;
+  top: 30px;
+  border: 0;
+  padding: 0;
+  color: hsl(0, 0%, 50%);
+  transition: 250ms ease color;
+  background-color: transparent;
+}
+
+.app-custom-fullscreen-ckeditor #sidebar-display-toggle:hover {
+  color: hsl(0, 0%, 30%);
+  cursor: pointer;
+}
+
+.app-custom-fullscreen-ckeditor #sidebar-display-toggle:focus,
+.app-custom-fullscreen-ckeditor #sidebar-display-toggle:active {
+  outline: none;
+  border: 1px solid #a9d29d;
+}
+
+.app-custom-fullscreen-ckeditor #sidebar-display-toggle svg {
+  fill: currentColor;
+}
+
+/* --------- COLLABORATION FEATURES (USERS) ------------------------------------------------------------------------ */
+.app-custom-fullscreen-ckeditor .row-presence {
+  width: 100%;
+  border: 1px solid hsl(0, 0%, 77%);
+  border-bottom: 0;
+  background: hsl(0, 0%, 98%);
+  padding: var(--ck-spacing-small);
+
+  /* Make `border-bottom` as `box-shadow` to not overlap with the editor border. */
+  box-shadow: 0 1px 0 0 hsl(0, 0%, 77%);
+
+  /* Make `z-index` bigger than `.editor` to properly display tooltips. */
+  z-index: 20;
+}
+
+.app-custom-fullscreen-ckeditor .ck.ck-presence-list {
+  flex: 1;
+  padding: 1.25rem 0.75rem;
+}
+
+.app-custom-fullscreen-ckeditor .presence .ck.ck-presence-list__counter {
+  order: 2;
+  margin-left: var(--ck-spacing-large);
+}
+
+/* --------- REAL TIME COLLABORATION FEATURES (SHARE TOPBAR CONTAINER) --------------------------------------------- */
+.app-custom-fullscreen-ckeditor .collaboration-demo__row {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  overflow-y: auto;
+  background-color: #f2f2f2;
+  border: 1px solid hsl(0, 0%, 77%);
+}
+
+body[data-editor="InlineEditor"] .collaboration-demo__row {
+  border: 0;
+}
+
+.app-custom-fullscreen-ckeditor .collaboration-demo__container {
+  max-width: var(--ck-sample-container-width);
+  margin: 0 auto;
+  padding: 1.25rem;
+}
+
+.app-custom-fullscreen-ckeditor .presence,
+.collaboration-demo__row {
+  transition: 0.2s opacity;
+}
+
+.app-custom-fullscreen-ckeditor .collaboration-demo__topbar {
+  background: #fff;
+  border: 1px solid var(--ck-color-toolbar-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 0;
+  border-radius: 4px 4px 0 0;
+}
+
+.app-custom-fullscreen-ckeditor .collaboration-demo__topbar .btn {
+  margin-right: 1em;
+  outline-offset: 2px;
+  outline-width: 2px;
+  background-color: var(--ck-sample-color-blue);
+}
+
+.app-custom-fullsc.app-custom-fullscreen-ckeditor
+  reen-ckeditor
+  .collaboration-demo__topbar
+  .btn:focus,
+.app-custom-fullscreen-ckeditor .collaboration-demo__topbar .btn:hover {
+  border-color: var(--ck-sample-color-blue);
+}
+
+.app-custom-fullscreen-ckeditor .collaboration-demo__share {
+  display: flex;
+  align-items: center;
+  padding: 1.25rem 0.75rem;
+}
+
+.app-custom-fullscreen-ckeditor .collaboration-demo__share-description p {
+  margin: 0;
+  font-weight: bold;
+  font-size: 0.9em;
+}
+
+.app-custom-fullscreen-ckeditor .collaboration-demo__share input {
+  height: auto;
+  font-size: 0.9em;
+  min-width: 220px;
+  margin: 0 10px;
+  border-radius: 4px;
+  border: 1px solid var(--ck-color-toolbar-border);
+}
+
+.app-custom-fullscreen-ckeditor .collaboration-demo__share button,
+.app-custom-fullscreen-ckeditor .collaboration-demo__share input {
+  height: 40px;
+  padding: 5px 10px;
+}
+
+.app-custom-fullscreen-ckeditor .collaboration-demo__share button {
+  position: relative;
+}
+
+.app-custom-fullscreen-ckeditor .collaboration-demo__share button:focus {
+  outline: none;
+}
+
+.app-custom-fullscreen-ckeditor
+  .collaboration-demo__share
+  button[data-tooltip]::before,
+.app-custom-fullscreen-ckeditor
+  .collaboration-demo__share
+  button[data-tooltip]::after {
+  position: absolute;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.15s cubic-bezier(0.5, 1, 0.25, 1);
+  z-index: 1;
+}
+
+.app-custom-fullscreen-ckeditor
+  .collaboration-demo__share
+  button[data-tooltip]::before {
+  content: attr(data-tooltip);
+  padding: 5px 15px;
+  border-radius: 3px;
+  background: #111;
+  color: #fff;
+  text-align: center;
+  font-size: 11px;
+  top: 100%;
+  left: 50%;
+  margin-top: 5px;
+  transform: translateX(-50%);
+}
+
+.app-custom-fullscreen-ckeditor
+  .collaboration-demo__share
+  button[data-tooltip]::after {
+  content: "";
+  border: 5px solid transparent;
+  width: 0;
+  font-size: 0;
+  line-height: 0;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-bottom: 5px solid #111;
+  border-top: none;
+}
+
+.app-custom-fullscreen-ckeditor
+  .collaboration-demo__share
+  button[data-tooltip]:hover:before,
+.app-custom-fullscreen-ckeditor
+  .collaboration-demo__share
+  button[data-tooltip]:hover:after {
+  visibility: visible;
+  opacity: 1;
+}
+
+.app-custom-fullscreen-ckeditor .collaboration-demo--ready {
+  overflow: visible;
+  height: auto;
+}
+
+.app-custom-fullscreen-ckeditor .collaboration-demo--ready .presence,
+.app-custom-fullscreen-ckeditor
+  .collaboration-demo--ready
+  .collaboration-demo__row {
+  opacity: 1;
+}
+
+/* --------- PAGINATION FEATURE ------------------------------------------------------------------------------------ */
+
+/* Pagination view line must be stacked at least at the same level as the editor,
+   otherwise it will be hidden underneath. */
+.app-custom-fullscreen-ckeditor .ck.ck-pagination-view-line {
+  z-index: var(--ck-sample-editor-z-index);
+}
+
+/* --------- REVISION HISTORY FEATURE ------------------------------------------------------------------------------ */
+
+.app-custom-fullscreen-ckeditor .revision-viewer-container {
+  display: none;
+}
+
+.app-custom-fullscreen-ckeditor .revision-viewer-sidebar {
+  position: relative;
+  min-width: 310px;
+  overflow: hidden;
+  background: var(--ck-color-toolbar-background);
+  border: 1px solid var(--ck-color-toolbar-border);
+  margin-left: -1px;
+}
+
+/* A case when Pagination and Revision History features are enabled in the editor. */
+/* Move the square with page number from the Pagination plugin to the left side, so that it does not cover the RH sidebar. */
+body[data-revision-history="true"] .ck.ck-pagination-view-line::after {
+  transform: translateX(-100%) !important;
+  left: -1px !important;
+  right: unset !important;
+}
+
+/* --------- SAMPLE GENERIC STYLES (not related to CKEditor) ------------------------------------------------------- */
+
+.app-custom-fullscreen-ckeditor {
+  height: 100%;
+  color: #2d3a4a;
+}
+.app-custom-fullscreen-ckeditor body * {
+  box-sizing: border-box;
+}
+
+.app-custom-fullscreen-ckeditor a {
+  color: #38a5ee;
+}
+
+.app-custom-fullscreen-ckeditor header .centered {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 8em;
+}
+
+.app-custom-fullscreen-ckeditor header h1 a {
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  color: #2d3a4a;
+  text-decoration: none;
+}
+
+.app-custom-fullscreen-ckeditor header h1 img {
+  display: block;
+  height: 64px;
+}
+
+.app-custom-fullscreen-ckeditor header nav ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.app-custom-fullscreen-ckeditor header nav ul li {
+  display: inline-block;
+}
+
+.app-custom-fullscreen-ckeditor header nav ul li + li {
+  margin-left: 1em;
+}
+
+.app-custom-fullscreen-ckeditor header nav ul li a {
+  font-weight: bold;
+  text-decoration: none;
+  color: #2d3a4a;
+}
+
+.app-custom-fullscreen-ckeditor header nav ul li a:hover {
+  text-decoration: underline;
+}
+.app-custom-fullscreen-ckeditor .app-custom-fullscreen-ckeditor main .message {
+  padding: 0 0 var(--ck-sample-base-spacing);
+  background: var(--ck-sample-color-green);
+  color: var(--ck-sample-color-white);
+}
+
+.app-custom-fullscreen-ckeditor main .message::after {
+  content: "";
+  z-index: -1;
+  display: block;
+  height: 10em;
+  width: 100%;
+  background: var(--ck-sample-color-green);
+  position: absolute;
+  left: 0;
+}
+
+.app-custom-fullscreen-ckeditor main .message h2 {
+  position: relative;
+  padding-top: 1em;
+  font-size: 2em;
+}
+
+.app-custom-fullscreen-ckeditor .centered {
+  /* Hide overlapping comments. */
+  overflow: hidden;
+  max-width: var(--ck-sample-container-width);
+  margin: 0 auto;
+  padding: 0 var(--ck-sample-base-spacing);
+}
+
+.app-custom-fullscreen-ckeditor .row {
+  display: flex;
+  position: relative;
+}
+
+.app-custom-fullscreen-ckeditor .btn {
+  cursor: pointer;
+  padding: 8px 16px;
+  font-size: 1rem;
+  user-select: none;
+  border-radius: 4px;
+  transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out,
+    border-color 0.2s ease-in-out, opacity 0.2s ease-in-out;
+  background-color: var(--ck-sample-color-button-blue);
+  border-color: var(--ck-sample-color-button-blue);
+  color: var(--ck-sample-color-white);
+  display: inline-block;
+}
+
+.app-custom-fullscreen-ckeditor .btn--tiny {
+  padding: 6px 12px;
+  font-size: 0.8rem;
+}
+
+.app-custom-fullscreen-ckeditor footer {
+  margin: calc(2 * var(--ck-sample-base-spacing)) var(--ck-sample-base-spacing);
+  font-size: 0.8em;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+/* --------- RWD --------------------------------------------------------------------------------------------------- */
+@media screen and (max-width: 800px) {
+  :root {
+    --ck-sample-base-spacing: 1em;
+  }
+
+  .app-custom-fullscreen-ckeditor header h1 {
+    width: 100%;
+  }
+
+  .app-custom-fullscreen-ckeditor header h1 img {
+    height: 40px;
+  }
+
+  .app-custom-fullscreen-ckeditor header nav ul {
+    text-align: right;
+  }
+
+  .app-custom-fullscreen-ckeditor
+    .app-custom-fullscreen-ckeditor
+    main
+    .message
+    h2 {
+    font-size: 1.5em;
+  }
+}
+
+/******START******* THIS CSS IS FOR COURSE CONTENT EDIOR AND CLASSROOM VIEW FOR ADMIN */
+
+.classroom_text_render ol {
+  margin-left: 2rem;
+  margin-bottom: 1rem;
+  list-style-type: decimal;
+}
+
+.classroom_text_render ol li {
+  list-style-type: lower-alpha;
+  font-size: 1rem;
+}
+
+.classroom_text_render ol li ul {
+  margin-left: 1rem;
+  margin-bottom: 0rem;
+}
+
+.classroom_text_render ol li ul li {
+  list-style-type: circle;
+  font-size: 0.9rem;
+}
+
+.classroom_text_render ul {
+  margin-left: 2rem;
+  margin-bottom: 1rem;
+  list-style-type: disc;
+}
+
+.classroom_text_render ul li {
+  list-style-type: disc;
+  font-size: 1rem;
+}
+
+.classroom_text_render ul li ol {
+  margin-left: 1rem;
+  margin-bottom: 0rem;
+}
+
+.classroom_text_render ul li ol li {
+  list-style-type: lower-alpha;
+  font-size: 0.9rem;
+}
+
+/* .classroom_text_render pre {
+  background-color: #323232;
+  font-family: Nanum Gothic Coding, monospace !important;
+  font-size: 1rem !important;
+  font-weight: 500;
+  color: #bef264;
+  padding: 1rem;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+} */
+
+.classroom_text_render blockquote {
+  background-color: #f4f4f5;
+  border-left: 3px solid green;
+  border-radius: 5px;
+  padding: 0.5rem;
+  padding-left: 4rem;
+  margin-bottom: 1rem;
+  font-style: italic;
+  quotes: "“" "”" "‘" "’";
+}
+
+.classroom_text_render blockquote::before {
+  color: green;
+  content: open-quote;
+  font-size: 4em;
+  line-height: 0.1em;
+  margin-right: 0.25em;
+  vertical-align: -0.4em;
+}
+
+.classroom_text_render blockquote::after {
+  color: green;
+  content: close-quote;
+  font-size: 4em;
+  line-height: 0.1em;
+  margin-right: 0.25em;
+  vertical-align: -0.6em;
+}
+
+.classroom_text_render img {
+  margin: auto;
+}
+
+.classroom_text_render blockquote p {
+  margin-bottom: 0;
+}
+
+.classroom_text_render iframe {
+  width: 100%;
+  height: 100%;
+}
+
+.classroom_text_render .table {
+  width: 100% !important;
+  margin: 1rem 0;
+  border-collapse: collapse;
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  font-size: 16px;
+}
+
+.classroom_text_render .table table {
+  width: 100%;
+}
+
+.classroom_text_render .table table td,
+.classroom_text_render .table table th {
+  padding: 0.5rem;
+  vertical-align: top;
+  border: 1px solid #dee2e6;
+  font-size: 16px;
+}
+
+.classroom_text_render .table table th {
+  font-weight: bold;
+  background-color: #d4d4d4;
+  text-align: left;
+}
+
+.classroom_text_render a {
+  color: #0d6efd !important;
+}
+
+/* new add css for classroom */
+.classroom_text_render h1 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+.classroom_text_render h2 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+.classroom_text_render h3 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+.classroom_text_render h4 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+.classroom_text_render h5 {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+.classroom_text_render h6 {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+.classroom_text_render mark.marker-green {
+  background-color: #2eff7b;
+  padding: 1px 6px;
+  border-radius: 5px;
+  color: #000;
+  font-size: 14px;
+}
+
+.classroom_text_render mark.marker-pink {
+  background-color: #fc7899;
+  padding: 1px 6px;
+  border-radius: 5px;
+  color: #000;
+  font-size: 14px;
+}
+.classroom_text_render mark.marker-blue {
+  background-color: #72ccfd;
+  padding: 1px 6px;
+  border-radius: 5px;
+  color: #000;
+  font-size: 14px;
+}
+.classroom_text_render mark.pen-red {
+  background-color: rgb(255, 172, 172);
+  padding: 1px 6px;
+  border-radius: 5px;
+  color: #000;
+  font-size: 14px;
+}
+
+.classroom_text_render p {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  word-break: break-word;
+  text-align: justify;
+}
+
+.classroom_text_render p .text-tiny {
+  font-size: 0.75rem;
+}
+.classroom_text_render p .text-small {
+  font-size: 0.9rem;
+}
+.classroom_text_render p .text-big {
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+.classroom_text_render p .text-huge {
+  font-size: 3rem;
+  font-weight: 500;
+}
+
+/* .classroom_text_render code {
+  background-color: #323232;
+  font-family: Nanum Gothic Coding, monospace !important;
+  font-size: 1rem !important;
+  font-weight: 500;
+  color: #bef264;
+  padding: 1rem;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+} */
+/* new add css for classroom */
+
+/* .classroom_text_render > pre {
+} */
+
+.classroom_text_render p code {
+  position: relative !important;
+  background-color: #323232 !important;
+  font-family: Nanum Gothic Coding, monospace !important;
+  font-size: 1rem !important;
+  font-weight: 500 !important;
+  color: #bef264 !important;
+  border-radius: 5px !important;
+  overflow: hidden !important;
+  margin-bottom: 1rem;
+}
+
+.classroom_text_render code {
+  display: block !important;
+  overflow: auto !important;
+  padding: 1rem !important;
+  padding-right: 3rem !important;
+  max-height: 50vh;
+}
+
+.code-parent {
+  position: relative !important;
+  background-color: #323232 !important;
+  font-family: Nanum Gothic Coding, monospace !important;
+  font-size: 1rem !important;
+  font-weight: 500 !important;
+  color: #bef264 !important;
+  border-radius: 5px !important;
+  overflow: hidden !important;
+  margin-bottom: 1rem;
+}
+
+.code-btn {
+  position: absolute;
+  background-color: #585858;
+  border-radius: 8px;
+  padding: 0;
+  top: 8px;
+  right: 8px;
+  color: white;
+  width: 2rem;
+  height: 2rem;
+}
+
+.classroom_text_render code::-webkit-scrollbar {
+  background-color: #585858;
+  height: 6px;
+  width: 6px;
+}
+
+.classroom_text_render code::-webkit-scrollbar-thumb {
+  background-color: #c3c3c3;
+  border-radius: 8px;
+}
+
+.classroom_text_render strong,
+.classroom_text_render span {
+  word-break: break-word;
+}
+
+.classroom_text_render .code-parent code * {
+  color: #bef264 !important;
+}
+
+/* Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar:hover::-webkit-scrollbar {
+  display: block;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.no-scrollbar:hover {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: thin; /* Firefox */
+}
+/******END******* THIS CSS IS FOR COURSE CONTENT EDIOR AND CLASSROOM VIEW FOR ADMIN */
+
+
+/* .phone-input:focus{
+  border-color: red !important;
+  outline: red !important;
+  box-shadow: none;
+} */
+
+
+.container-phone-input .form-control:focus + .special-label{
+  color: #1976d2 !important
+}
+
+.container-phone-input .form-control:focus{
+   /* outline-color:  red !important;
+   border-color: red !important; */
+   box-shadow: 0 0 0 1px #1976d2 !important;
+}
+
+.error-phone-input .form-control:focus {
+  box-shadow: 0 0 0 1px #D32F2F !important;
+}
